@@ -6,7 +6,12 @@
       zone      = yandex_vpc_subnet.catlang-subnet.zone
       subnet_id = yandex_vpc_subnet.catlang-subnet.id
     }
+    public_ip = true
     security_group_ids = [yandex_vpc_security_group.k8s-public-services.id]
+
+    maintenance_policy {
+      auto_upgrade = true
+    }
   }
   service_account_id      = yandex_iam_service_account.catlang-sa.id
   node_service_account_id = yandex_iam_service_account.catlang-sa.id
@@ -15,6 +20,9 @@
     yandex_resourcemanager_folder_iam_member.vpc-public-admin,
     yandex_resourcemanager_folder_iam_member.images-puller
   ]
+
+  release_channel = "REGULAR"
+  
   kms_provider {
     key_id = yandex_kms_symmetric_key.kms-key.id
   }

@@ -45,4 +45,9 @@
     auto_upgrade = true
     auto_repair  = true
   }
+
+  deploy_policy {
+    max_expansion  = 1
+    max_unavailable = 0
+  }
 }
